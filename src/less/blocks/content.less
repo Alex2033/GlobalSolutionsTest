@@ -1,0 +1,119 @@
+.content {
+    padding-top: 30px;
+}
+
+.content__top {
+    &.active {
+        p, .link, .content__img, .decrease-button {
+            display: none;
+        }
+
+        .content__text {
+            width: 100%;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        + .content__bottom {
+            .swiper-button-next, .swiper-button-prev {
+                display: block;
+            }
+        }
+
+        .content__slider-next, .content__slider-prev {
+            display: none;
+        }
+    }
+}
+
+.content__container {
+    .container();
+}
+
+.content__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    position: relative;
+}
+
+.content__slider {
+    overflow: visible;
+    z-index: 2;
+    margin-bottom: 15px;
+}
+
+.content__slider-item {
+    cursor: pointer;
+}
+
+.content__text {
+    width: ~"calc(50% - 20px)";
+
+    p {
+        &:last-of-type {
+            margin-bottom: 30px;
+        }
+    }
+}
+
+.content__img {
+    margin-top: 25px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: 1px solid @text;
+    width: ~"calc(50% - 20px)";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    box-shadow: 0 6px 5px 0px rgba(0,0,0, 0.1);
+    height: 315px;
+}
+
+.content__bottom {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        height: 1px;
+        background-color: #E6E6E6;
+        width: 100%;
+    }
+}
+
+.content__slider-next, .content__slider-prev {
+    z-index: 10;
+    position: absolute;
+    background-size: 15px 15px;
+    width: 50%;
+    top: 0;
+    height: 100%;
+    margin-top: -10px;
+    box-shadow: 0 0 5px -5px #000;
+    cursor: pointer;
+
+    &.swiper-button-disabled {
+        opacity: 1;
+    }
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+.content__slider-next, .swiper-container-rtl .content__slider-prev {
+    right: 0;
+    left: auto;
+}
+
+.content__slider-prev, .swiper-container-rtl .content__slider-next {
+    left: 0;
+    right: auto;
+}

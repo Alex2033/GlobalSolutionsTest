@@ -1,0 +1,31 @@
+.link {
+    color: @accent;
+    font-style: italic;
+    font-weight: 400;
+    display: inline-block;
+    margin-bottom: 5px;
+    position: relative;
+    padding: 5px 0;
+
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        background-color: @text;
+        left: 7px;
+        height: 10px;
+        width: 1px;
+        transform: translate(-50%, -50%);
+    }
+
+    &::before {
+        top: 2px;
+    }
+
+    &::after {
+        bottom: -10px;
+    }
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
