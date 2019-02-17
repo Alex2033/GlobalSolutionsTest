@@ -1,4 +1,5 @@
 .slider-nav {
+    overflow: visible;
     .swiper-wrapper {
         justify-content: center;
         align-items: stretch;
@@ -9,6 +10,13 @@
         height: initial;
         display: flex;
         justify-content: center;
+
+        &:hover {
+            .slider-nav__popup {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
     }
 }
 
@@ -23,12 +31,69 @@
     border-radius: 10px;
     border: 1px solid @text;
     cursor: pointer;
+    position: relative;
 
     &:hover{
         border-color: black;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 20px;
+        }
     }
 }
 
 .slider-nav__img {
     width: 120px;
+}
+
+.slider-nav__popup {
+    padding: 10px;
+    position: absolute;
+    user-select: text;
+    left: 50%;
+    width: 350px;
+    opacity: 0;
+    visibility: hidden;
+    top: ~"calc(100% + 20px)";
+    transform: translateX(-50%);
+    border-radius: 6px;
+    background-color: #ffffff;
+    border: 1px solid @text;
+    transition: opacity .15s ease, visibility .15s ease;
+
+    h6 {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    p {
+        margin-bottom: 0;
+        color: @accent;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: -1px;
+        width: 20px;
+        height: 1px;
+        background-color: #fff;
+    }
+}
+
+.slider-nav__popup-triangle {
+    position: absolute;
+    left: ~"calc(50% - 1px)";
+    top: -11px;
+    width: 22px;
+    height: 11px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 88.15 46.94'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%238b8b8b;stroke:%238b8b8b;stroke-linejoin:round;stroke-width:4px;%7D%3C/style%3E%3C/defs%3E%3Ctitle%3Etriangle%3C/title%3E%3Cg id='Слой_2' data-name='Слой 2'%3E%3Cg id='Слой_1-2' data-name='Слой 1'%3E%3Cpath id='svg_1' data-name='svg 1' class='cls-1' d='M48.19.72.69,46.22'/%3E%3Cpath id='svg_2' data-name='svg 2' class='cls-1' d='M47.91,2.1,87.4,46'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
