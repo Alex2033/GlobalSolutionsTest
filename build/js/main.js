@@ -1,5 +1,3 @@
-var flag = false;
-
 var galleryThumbs = new Swiper('.slider-nav', {
     spaceBetween: 20,
     slidesPerView: 5,
@@ -9,7 +7,7 @@ var galleryThumbs = new Swiper('.slider-nav', {
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
-    },
+    }
 });
 
 var galleryTop = new Swiper('.content__slider', {
@@ -56,19 +54,44 @@ function checkStatus() {
         });
         galleryTop.controller.control = galleryThumbs;
         galleryThumbs.controller.control = galleryTop;
+        $('.swiper-button-next').css({'right': '37%'});
+        $('.swiper-button-prev').css({'left': '37%'});
         galleryThumbs.update();
-        $('.slider-nav .swiper-wrapper').css({'justify-content': 'initial'});
     } else {
-        galleryThumbs.params.slidesPerView = '5';
-        galleryThumbs.update();
+        $('.swiper-button-next').css({'right': '0'});
+        $('.swiper-button-prev').css({'left': '0'});
+        if (galleryThumbs.params.slidesPerView !== '5') {
+            galleryThumbs.params.slidesPerView = '5';
+            galleryThumbs.update();
+        }
+    }
+}
+
+$(document).ready(function() {
+    if ($('.slider-nav .swiper-slide').length > 5) {
+        $('.swiper-button-next, .swiper-button-prev').css({'display': 'block'});
+    } 
+});
+
+function changeContainerAligning() {
+    if ($('.slider-nav .swiper-slide').length > 5) {
+        $('.slider-nav .swiper-wrapper').css({'justify-content': 'initial'});
+        $('.swiper-button-next, .swiper-button-prev').css({'display': 'block'});
+    } else if ($('.content__top').hasClass('active') && $('.slider-nav .swiper-slide').length <= 5) {
+        $('.slider-nav .swiper-wrapper').css({'justify-content': 'initial'});
+    } else if ($('.content__top').hasClass('active') && $('.slider-nav .swiper-slide').length > 5) {
+        $('.slider-nav .swiper-wrapper').css({'justify-content': 'center'});
+    } else {
         $('.slider-nav .swiper-wrapper').css({'justify-content': 'center'});
     }
 }
 
 $(document).ready(function() {
     checkStatus();
+    changeContainerAligning();
 });
 
 $('html').mouseover(function(){
     checkStatus();
+    changeContainerAligning();
 });
